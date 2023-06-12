@@ -19,7 +19,7 @@ const Category = () => {
     return (
         <>
             <SectionTitle
-                subHeading={"---From 11:00am to 10:00pm---"}
+                subHeading={"From 11:00am to 10:00pm"}
                 heading={"ORDER ONLINE"}
             >
             </SectionTitle>
@@ -40,19 +40,7 @@ const Category = () => {
                 <SwiperSlide><img src={slide3} alt="" /><h3 className='uppercase text-2xl shadow -mt-20 text-center'>Soup</h3></SwiperSlide>
                 <SwiperSlide><img src={slide4} alt="" /><h3 className='uppercase text-2xl shadow -mt-20 text-center'>desserts</h3></SwiperSlide>
                 <SwiperSlide><img src={slide5} alt="" /></SwiperSlide>
-
             </Swiper>
-            <div className='relative my-16'>
-                <img src={chefService} alt="" />
-                <div className='absolute top-1/3'>
-                    <div className='flex justify-center items-center'>
-                        <div className='bg-white opacity-90 w-9/12 text-center p-10'>
-                            <h2 className='uppercase text-4xl'>Bistro Boss</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, libero accusamus laborum deserunt ratione dolor officiis praesentium! Deserunt magni aperiam dolor eius dolore at, nihil iusto ducimus incidunt quibusdam nemo.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </>
     );
 };
