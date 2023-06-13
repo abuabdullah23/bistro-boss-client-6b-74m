@@ -7,18 +7,23 @@ import ChefRecommends from '../ChefRecommends/ChefRecommends';
 import Featured from '../Featured/Featured';
 import BistroBoss from '../BistroBoss/BistroBoss';
 import Testimonials from '../Testimonials/Testimonials';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     return (
         <div>
-            <Banner/>
-            <Category/>
-            <BistroBoss/>
-            <PopularMenu/>
-            <CallUs/>
-            <ChefRecommends/>
-            <Featured/>
-            <Testimonials/>
+            <Helmet>
+                <title>Bistro Boss | Home</title>
+            </Helmet>
+
+            <Banner />
+            <Category />
+            <BistroBoss />
+            <PopularMenu />
+            <CallUs />
+            <ChefRecommends />
+            <Featured />
+            <Testimonials />
         </div>
     );
 };

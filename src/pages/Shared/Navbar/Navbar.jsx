@@ -10,7 +10,6 @@ const Navbar = () => {
             <li><Link to="/">Dashboard</Link></li>
             <li><Link to="/menu">Our Menu</Link></li>
             <li><Link to="/">Our Shop</Link></li>
-            
         </>
 
 
@@ -26,7 +25,11 @@ const Navbar = () => {
                             {navOptions}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">Bistro Boss</a>
+                    <Link to="/" className='uppercase px-3 py-2 hover:bg-black rounded-md'>
+                        <p className="text-2xl font-semi-bold">Bistro Boss</p>
+                        <p className='tracking-[.32em]'>Restaurant</p>
+                    </Link>
+
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 uppercase">
