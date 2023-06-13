@@ -1,0 +1,5 @@
+.category-cover-bg {
+    background-image: url(../../../src/assets/home/chef-service.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
