@@ -14,7 +14,7 @@ const MenuCategory = ({ items, title }) => {
                     ></MenuItem>)
                 }
             </div>
-            <Link to={`/order`}>
+            <Link to={`/order/${title}`}>
                 <CommonButton
                     btnTitle={'ORDER YOUR FAVOURITE FOOD'}
                 ></CommonButton>
