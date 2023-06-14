@@ -7,14 +7,15 @@ import coverImg from '../../../assets/menu/banner3.jpg'
 import MenuItem from '../../Shared/MenuItem/MenuItem';
 import CommonButton from '../../../components/CommonButton';
 import CategoryCover from '../../../components/CategoryCover/CategoryCover';
+import MenuCategory from '../MenuCategory/MenuCategory';
 
 const Menu = () => {
     const [menu] = useMenu();
     const offered = menu.filter(item => item.category === 'offered');
-    const dessert = menu.filter(item => item.category === 'dessert');
+    const desserts = menu.filter(item => item.category === 'dessert');
     const pizza = menu.filter(item => item.category === 'pizza');
-    const salad = menu.filter(item => item.category === 'salad');
-    const soup = menu.filter(item => item.category === 'soup');
+    const salads = menu.filter(item => item.category === 'salad');
+    const soups = menu.filter(item => item.category === 'soup');
 
     return (
         <div>
@@ -28,95 +29,51 @@ const Menu = () => {
                 subTitle={"Would you like to try a dish?"}
             ></Cover>
 
-            {/* category section */}
-            <SectionTitle
-                subHeading={"Don't miss"}
-                heading={"TODAY'S OFFER"}
-            ></SectionTitle>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 p-5 md:p-0'>
-                {
-                    offered.map(item => <MenuItem
-                        key={item._id}
-                        item={item}
-                    ></MenuItem>)
-                }
-            </div>
-            <CommonButton
-                btnTitle={'ORDER YOUR FAVOURITE FOOD'}
-            ></CommonButton>
+            {/* Offered category section */}
+            <SectionTitle subHeading={"Don't miss"} heading={"TODAY'S OFFER"}></SectionTitle>
+            <MenuCategory
+                items={offered}
+                title="offered"
+            ></MenuCategory>
+
 
             {/* Desserts Menu Section */}
             <CategoryCover
                 title={"Desserts"}
-                subTitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
-            ></CategoryCover>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 p-5 md:p-0'>
-                {
-                    dessert.map(item => <MenuItem
-                        key={item._id}
-                        item={item}
-                    ></MenuItem>)
-                }
-            </div>
-            <CommonButton
-                btnTitle={'ORDER YOUR FAVOURITE FOOD'}
-            ></CommonButton>
+                subTitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}></CategoryCover>
+
+            <MenuCategory
+                items={desserts}
+                title="desserts"
+            ></MenuCategory>
 
             {/* Pizza Menu Section */}
             <CategoryCover
                 title={"Pizza"}
-                subTitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
-            ></CategoryCover>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 p-5 md:p-0'>
-                {
-                    pizza.map(item => <MenuItem
-                        key={item._id}
-                        item={item}
-                    ></MenuItem>)
-                }
-            </div>
-            <CommonButton
-                btnTitle={'ORDER YOUR FAVOURITE FOOD'}
-            ></CommonButton>
-
+                subTitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}></CategoryCover>
+            <MenuCategory
+                items={pizza}
+                title="pizza"
+            ></MenuCategory>
 
             {/* salads Menu Section */}
             <CategoryCover
                 title={"Salads"}
-                subTitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
-            ></CategoryCover>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 p-5 md:p-0'>
-                {
-                    salad.map(item => <MenuItem
-                        key={item._id}
-                        item={item}
-                    ></MenuItem>)
-                }
-            </div>
-            <CommonButton
-                btnTitle={'ORDER YOUR FAVOURITE FOOD'}
-            ></CommonButton>
+                subTitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."} ></CategoryCover>
+            <MenuCategory
+                items={salads}
+                title={"salads"}
+            ></MenuCategory>
 
             {/* Soups Menu Section */}
             <CategoryCover
                 title={"Soups"}
                 subTitle={"Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."}
             ></CategoryCover>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mb-10 p-5 md:p-0'>
-                {
-                    soup.map(item => <MenuItem
-                        key={item._id}
-                        item={item}
-                    ></MenuItem>)
-                }
-            </div>
-            <CommonButton
-                btnTitle={'ORDER YOUR FAVOURITE FOOD'}
-            ></CommonButton>
-
-
-
-
+            <MenuCategory
+                items={soups}
+                title={'soups'}
+            ></MenuCategory>
 
         </div>
     );
