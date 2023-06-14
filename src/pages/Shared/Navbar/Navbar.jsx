@@ -36,8 +36,8 @@ const Navbar = () => {
                         {navOptions}
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <a className="btn">Button</a>
+                <div className="navbar-end md:flex gap-5 mr-10 text-xl">
+                    <Link to="/login">Login</Link>
                 </div>
             </div>
         </>
