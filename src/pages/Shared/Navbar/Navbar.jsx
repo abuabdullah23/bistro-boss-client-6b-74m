@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
 
     const navOptions =
         <>
@@ -12,10 +15,30 @@ const Navbar = () => {
             <li><Link to="/order/offered">Order Food</Link></li>
         </>
 
+    // handleLogOut
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Welcome...',
+                    text: `Successfully Log Out`,
+                })
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${error.message}`,
+                })
+            })
+    }
+
 
     return (
         <>
-            <div className="navbar fixed z-10 max-w-7xl bg-[#15151583] text-white">
+            <div className="navbar fixed z-10 max-w-7xl bg-[#151515] bg-opacity-80 text-white">
+
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -29,15 +52,18 @@ const Navbar = () => {
                         <p className="text-2xl font-semi-bold">Bistro Boss</p>
                         <p className='tracking-[.32em]'>Restaurant</p>
                     </Link>
-
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 uppercase">
                         {navOptions}
                     </ul>
                 </div>
-                <div className="navbar-end md:flex gap-5 mr-10 text-xl">
-                    <Link to="/login">Login</Link>
+                <div className="navbar-end md:flex gap-5 mr-10 text-lg font-semibold">
+                    {
+                        user
+                            ? <button onClick={handleLogOut} className='hover:bg-white hover:text-black py-2 px-3 rounded-md'>Log Out</button>
+                            : <Link className='hover:bg-white hover:text-black py-2 px-3 rounded-md' to="/login">Login</Link>
+                    }
                 </div>
             </div>
         </>
