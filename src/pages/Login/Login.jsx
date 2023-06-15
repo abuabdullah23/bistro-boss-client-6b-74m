@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import BackToHome from '../../components/BackToHome';
 import { AuthContext } from '../../provider/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 
 const Login = () => {
@@ -45,8 +46,8 @@ const Login = () => {
 
     }
 
-    const handleValidateCaptcha = () => {
-        const user_captcha_value = captchaRef.current.value;
+    const handleValidateCaptcha = (event) => {
+        const user_captcha_value = event.target.value;
         if (validateCaptcha(user_captcha_value) == true) {
             setDisabled(false);
             Swal.fire({
@@ -69,10 +70,13 @@ const Login = () => {
 
     return (
         <div className='login-bg'>
-            <div className='px-10 py-5'>
+            <div className='px-10 py-2'>
                 <BackToHome></BackToHome>
             </div>
-            <div className='md:p-20 p-5 md:flex gap-10 items-center'>
+            <Helmet>
+                <title>Bistro Boss | Login</title>
+            </Helmet>
+            <div className='md:px-20 p-5 md:flex gap-10 items-center drop-shadow-sm'>
                 <div className='w-full'>
                     <img src={loginImg} alt="" />
                 </div>
@@ -95,8 +99,8 @@ const Login = () => {
                         <div className='mb-5'>
                             <LoadCanvasTemplate />
 
-                            <input ref={captchaRef} className='py-2 px-4 rounded-md w-full mt-4' type="text" required name="captcha" id="captcha" placeholder='Type Captcha here' />
-                            <button onClick={handleValidateCaptcha} className='mt-3 py-2 px-3 rounded-md text-blue-600 hover:text-white bg-white hover:bg-[#D1A054]'>Validate</button>
+                            <input onBlur={handleValidateCaptcha} className='py-2 px-4 rounded-md w-full mt-4' type="text" required name="captcha" id="captcha" placeholder='Type Captcha here' />
+                            {/* <button className='mt-3 py-2 px-3 rounded-md text-blue-600 hover:text-white bg-white hover:bg-[#D1A054]'>Validate</button> */}
                         </div>
                         <button disabled={disabled} type='submit' className='w-full py-3 px-5 text-white rounded-md bg-[#D1A054] hover:bg-[#b67a21]'>Sign In</button>
                     </form>
