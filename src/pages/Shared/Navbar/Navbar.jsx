@@ -10,9 +10,10 @@ const Navbar = () => {
         <>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/">Contact Us</Link></li>
-            <li><Link to="/">Dashboard</Link></li>
+            <li><Link to="/dashboard">Dashboard</Link></li>
             <li><Link to="/menu">Our Menu</Link></li>
             <li><Link to="/order/offered">Order Food</Link></li>
+            <li><Link to="/secret">Secret</Link></li>
         </>
 
     // handleLogOut
@@ -61,7 +62,10 @@ const Navbar = () => {
                 <div className="navbar-end md:flex gap-5 mr-10 text-lg font-semibold">
                     {
                         user
-                            ? <button onClick={handleLogOut} className='hover:bg-white hover:text-black py-2 px-3 rounded-md'>Log Out</button>
+                            ? <>
+                                <button onClick={handleLogOut} className='hover:bg-white hover:text-black py-2 px-3 rounded-md'>Log Out</button>
+                                <img className='w-10 h-10 rounded-full object-cover cursor-pointer' src={user?.photoURL} title={user?.displayName} alt={user?.displayName} />
+                            </>
                             : <Link className='hover:bg-white hover:text-black py-2 px-3 rounded-md' to="/login">Login</Link>
                     }
                 </div>

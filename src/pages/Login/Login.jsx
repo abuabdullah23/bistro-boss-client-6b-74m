@@ -3,7 +3,7 @@ import './Login.css';
 import loginImg from '../../assets/others/authentication2.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import Swal from 'sweetalert2';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import BackToHome from '../../components/BackToHome';
 import { AuthContext } from '../../provider/AuthProvider';
@@ -11,10 +11,15 @@ import { Helmet } from 'react-helmet-async';
 
 
 const Login = () => {
-    const captchaRef = useRef(null);
+    // const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true)
 
     const { signIn } = useContext(AuthContext);
+
+    // redirect after login
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     // for Captcha
     useEffect(() => {
@@ -35,6 +40,7 @@ const Login = () => {
                     title: 'Welcome...',
                     text: `${result.user.email} is : Successfully Logged In`,
                 })
+                navigate(from, {replace: true})
             })
             .catch(error => {
                 Swal.fire({
@@ -55,7 +61,7 @@ const Login = () => {
                 icon: 'success',
                 title: 'Captcha Matched',
                 showConfirmButton: false,
-                timer: 500
+                timer: 1000
             })
         }
         else {
@@ -98,9 +104,10 @@ const Login = () => {
                         {/* captcha */}
                         <div className='mb-5'>
                             <LoadCanvasTemplate />
-
-                            <input onBlur={handleValidateCaptcha} className='py-2 px-4 rounded-md w-full mt-4' type="text" required name="captcha" id="captcha" placeholder='Type Captcha here' />
-                            {/* <button className='mt-3 py-2 px-3 rounded-md text-blue-600 hover:text-white bg-white hover:bg-[#D1A054]'>Validate</button> */}
+                            <div className='md:flex gap-3'>
+                                <input onBlur={handleValidateCaptcha} className='py-2 px-4 rounded-md w-full mt-4' type="text" required name="captcha" id="captcha" placeholder='Type Captcha here' />
+                                <p className='mt-3 py-2 px-3 w-fit cursor-pointer rounded-md text-blue-600 hover:text-white bg-white hover:bg-[#D1A054]'>Validate</p>
+                            </div>
                         </div>
                         <button disabled={disabled} type='submit' className='w-full py-3 px-5 text-white rounded-md bg-[#D1A054] hover:bg-[#b67a21]'>Sign In</button>
                     </form>

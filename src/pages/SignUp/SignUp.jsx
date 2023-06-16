@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/others/authentication2.png'
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import BackToHome from '../../components/BackToHome';
@@ -10,19 +10,32 @@ import { useForm } from "react-hook-form";
 import { Helmet } from 'react-helmet-async';
 
 const SignUp = () => {
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
+        const name = data.name;
         const email = data.email;
         const password = data.password;
+        const photoURL = data.photoURL;
         createUser(email, password)
             .then(result => {
                 Swal.fire({
                     icon: 'success',
                     title: 'Welcome...',
                     text: `${result.user.email} is : Successfully Signed Up`,
-                })
+                });
+                updateUserProfile(name, photoURL)
+                    .then(result => {
+                        console.log(result.user)
+                        reset('');
+                        navigate('/');
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
             })
             .catch(error => {
                 Swal.fire({
@@ -32,7 +45,6 @@ const SignUp = () => {
                 })
             })
     };
-    const { createUser } = useContext(AuthContext);
 
 
     return (
@@ -82,6 +94,13 @@ const SignUp = () => {
                             {errors.password?.type === 'minLength' && <span className='text-red-500 mt-2'>Length should be 6 character</span>}
                             {errors.password?.type === 'maxLength' && <span className='text-red-500 mt-2'>Length should be less then 21</span>}
                             {errors.password?.type === 'pattern' && <span className='text-red-500 mt-2'>Password must be One uppercase, one special character, one number and one small character.</span>}
+                        </div>
+
+                        {/* Photo Url */}
+                        <div className='mb-5'>
+                            <p className='mb-2'>Photo Url</p>
+                            <input className='py-2 px-4 rounded-md w-full' type="text" {...register("photoURL", { required: true })} name="photoURL" id="photoURL" placeholder='Type your photo url here' />
+                            {errors.name && <span className='text-red-500 mt-2'>Photo Url is required</span>}
                         </div>
 
                         <button type='submit' className='w-full py-3 px-5 text-white rounded-md bg-[#D1A054] hover:bg-[#b67a21]'>Sign Up</button>
