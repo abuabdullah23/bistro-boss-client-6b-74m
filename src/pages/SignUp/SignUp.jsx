@@ -83,17 +83,19 @@ const SignUp = () => {
                         {/* https://stackoverflow.com/questions/5142103/regex-to-validate-password-strength */}
                         <div className='mb-5'>
                             <p className='mb-2'>Password</p>
-                            <input className='py-2 px-4 rounded-md w-full' type="password" {...register("password", {
-                                required: true,
-                                minLength: 6,
-                                maxLength: 20,
-                                pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
+                            <input className='py-2 px-4 rounded-md w-full' type="password" 
+                            // {...register("password", {
+                                // required: true,
+                                // minLength: 6,
+                                // maxLength: 20,
+                                // pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
 
-                            })} required name="password" id="password" placeholder='Enter your password' />
-                            {errors.password?.type === 'required' && <span className='text-red-500 mt-2'>Password is required</span>}
+                            // })} 
+                            required name="password" id="password" placeholder='Enter your password' />
+                            {/* {errors.password?.type === 'required' && <span className='text-red-500 mt-2'>Password is required</span>}
                             {errors.password?.type === 'minLength' && <span className='text-red-500 mt-2'>Length should be 6 character</span>}
                             {errors.password?.type === 'maxLength' && <span className='text-red-500 mt-2'>Length should be less then 21</span>}
-                            {errors.password?.type === 'pattern' && <span className='text-red-500 mt-2'>Password must be One uppercase, one special character, one number and one small character.</span>}
+                            {errors.password?.type === 'pattern' && <span className='text-red-500 mt-2'>Password must be One uppercase, one special character, one number and one small character.</span>} */}
                         </div>
 
                         {/* Photo Url */}

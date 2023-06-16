@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../provider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FaShoppingCart } from 'react-icons/fa';
+import useCart from '../../../hooks/useCart';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [cart]  = useCart();
 
     const navOptions =
         <div className='md:flex items-center'>
@@ -17,7 +19,7 @@ const Navbar = () => {
             <li><Link to="/secret">Secret</Link></li>
             <li><Link>
                 <div className="indicator">
-                    <span className="indicator-item badge badge-secondary text-white">0</span>
+                    <span className="indicator-item badge badge-secondary text-white">{cart?.length || 0}</span>
                     <FaShoppingCart className='w-8 h-8 hover:text-red-600' />
                 </div>
             </Link></li>
