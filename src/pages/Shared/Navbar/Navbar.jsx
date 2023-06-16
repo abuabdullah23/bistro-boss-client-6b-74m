@@ -2,19 +2,26 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../provider/AuthProvider';
 import Swal from 'sweetalert2';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
 
     const navOptions =
-        <>
+        <div className='md:flex items-center'>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/">Contact Us</Link></li>
             <li><Link to="/dashboard">Dashboard</Link></li>
             <li><Link to="/menu">Our Menu</Link></li>
             <li><Link to="/order/offered">Order Food</Link></li>
             <li><Link to="/secret">Secret</Link></li>
-        </>
+            <li><Link>
+                <div className="indicator">
+                    <span className="indicator-item badge badge-secondary text-white">0</span>
+                    <FaShoppingCart className='w-8 h-8 hover:text-red-600' />
+                </div>
+            </Link></li>
+        </div>
 
     // handleLogOut
     const handleLogOut = () => {
@@ -64,7 +71,7 @@ const Navbar = () => {
                         user
                             ? <>
                                 <button onClick={handleLogOut} className='hover:bg-white hover:text-black py-2 px-3 rounded-md'>Log Out</button>
-                                <img className='w-10 h-10 rounded-full object-cover cursor-pointer' src={user?.photoURL} title={user?.displayName} alt={user?.displayName} />
+                                <img className='w-10 h-10 rounded-full object-cover cursor-pointer' src={user.photoURL? user?.photoURL : ''} title={user.displayName ? user?.displayName : user.email} alt={user.displayName ? user?.displayName : user.email} />
                             </>
                             : <Link className='hover:bg-white hover:text-black py-2 px-3 rounded-md' to="/login">Login</Link>
                     }
