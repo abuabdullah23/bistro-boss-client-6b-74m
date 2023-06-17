@@ -1,4 +1,6 @@
 .active {
     font-weight: 400;
     color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-decoration: underline;
 }

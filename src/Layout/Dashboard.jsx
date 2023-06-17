@@ -3,8 +3,10 @@ import { FaBars, FaBook, FaCalendar, FaHamburger, FaHome, FaInbox, FaShoppingBag
 import { MdReviews } from "react-icons/md";
 import { Link, Outlet } from 'react-router-dom';
 import ActiveLink from '../components/ActiveLink/ActiveLink';
+import useCart from '../hooks/useCart';
 
 const Dashboard = () => {
+    const [cart] = useCart();
 
     const navItem = <>
         <li><Link to="/" className='flex flex-col uppercase px-3 py-2 rounded-md justify-center mb-10'>
@@ -12,7 +14,7 @@ const Dashboard = () => {
             <p className='tracking-[.6em]'>Restaurant</p>
         </Link></li>
         <li>
-            <div className='flex items-center gap-4 justify-start'>
+            <div className='flex items-center gap-4 justify-start tracking-normal'>
                 <FaHome />
                 <ActiveLink to="/dashboard/user-home">  User Home</ActiveLink>
             </div>
@@ -20,7 +22,7 @@ const Dashboard = () => {
 
 
         <li>
-            <div className='flex items-center gap-4 justify-start'>
+            <div className='flex items-center gap-4 justify-start tracking-normal'>
                 <FaCalendar />
                 <ActiveLink to="/dashboard/reservation"> reservation</ActiveLink>
             </div>
@@ -28,7 +30,7 @@ const Dashboard = () => {
 
 
         <li>
-            <div className='flex items-center gap-4 justify-start'>
+            <div className='flex items-center gap-4 justify-start tracking-normal'>
                 <FaWallet />
                 <ActiveLink to="/dashboard/history"> payment history</ActiveLink>
             </div>
@@ -36,15 +38,16 @@ const Dashboard = () => {
 
 
         <li>
-            <div className='flex items-center gap-4 justify-start'>
-                <FaShoppingCart/>
+            <div className='flex items-center gap-4 justify-start tracking-normal'>
+                <FaShoppingCart />
                 <ActiveLink to="/dashboard/mycart">  my cart</ActiveLink>
+                <span className="indicator-item badge badge-neutral text-white">{cart?.length || 0}</span>
             </div>
         </li>
 
 
         <li>
-            <div className='flex items-center gap-4 justify-start'>
+            <div className='flex items-center gap-4 justify-start tracking-normal'>
                 <MdReviews />
                 <ActiveLink to="/dashboard/review">  add review</ActiveLink>
             </div>
@@ -52,7 +55,7 @@ const Dashboard = () => {
 
 
         <li>
-            <div className='flex items-center gap-4 justify-start'>
+            <div className='flex items-center gap-4 justify-start tracking-normal'>
                 <FaBook />
                 <ActiveLink to="/dashboard/booking">  my booking</ActiveLink>
             </div>
@@ -60,7 +63,7 @@ const Dashboard = () => {
 
         <hr className='w-full my-5' />
         <li>
-            <div className='flex items-center gap-4 justify-start'>
+            <div className='flex items-center gap-4 justify-start tracking-normal'>
                 <FaHome />
                 <ActiveLink to="/dashboard/home">  Home</ActiveLink>
             </div>
@@ -68,7 +71,7 @@ const Dashboard = () => {
 
 
         <li>
-            <div className='flex items-center gap-4 justify-start'>
+            <div className='flex items-center gap-4 justify-start tracking-normal'>
                 <FaBars />
                 <ActiveLink to="/dashboard/menu">  Menu</ActiveLink>
             </div>
@@ -76,7 +79,7 @@ const Dashboard = () => {
 
 
         <li>
-            <div className='flex items-center gap-4 justify-start'>
+            <div className='flex items-center gap-4 justify-start tracking-normal'>
                 <FaShoppingBag />
                 <ActiveLink to="/dashboard/shop">  Shop</ActiveLink>
             </div>
@@ -84,7 +87,7 @@ const Dashboard = () => {
 
 
         <li>
-            <div className='flex items-center gap-4 justify-start'>
+            <div className='flex items-center gap-4 justify-start tracking-normal'>
                 <FaInbox />
                 <ActiveLink to="/dashboard/contact">  Contact</ActiveLink>
             </div>
@@ -104,9 +107,9 @@ const Dashboard = () => {
                         <Outlet />
                     </div>
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side h-full">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                    <ul style={{fontSize: '17px'}} className="menu p-4 w-80 md:h-full bistro-bg uppercase">
+                    <ul style={{ fontSize: '16px' }} className="menu p-4 w-fit md:h-full bistro-bg uppercase">
                         {/* Sidebar content here */}
                         {navItem}
                     </ul>

@@ -3,11 +3,10 @@ import SectionTitle from '../../../components/SectionTitle';
 import { Helmet } from 'react-helmet-async';
 import useCart from '../../../hooks/useCart';
 import SingleCart from './SingleCart';
-import { FaTrash } from 'react-icons/fa';
 
 const MyCart = () => {
     const [cart] = useCart();
-    const total = cart.reduce((sum, item) => item.price + sum, 0);
+    const total = cart.reduce((sum, item) => (item.price + sum), 0).toFixed(2);
     return (
         <div>
             <Helmet>

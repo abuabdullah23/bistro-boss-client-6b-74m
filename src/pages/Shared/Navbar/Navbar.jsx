@@ -4,6 +4,7 @@ import { AuthContext } from '../../../provider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FaShoppingCart } from 'react-icons/fa';
 import useCart from '../../../hooks/useCart';
+import ActiveLink from '../../../components/ActiveLink/ActiveLink';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -11,18 +12,18 @@ const Navbar = () => {
 
     const navOptions =
         <div className='md:flex items-center'>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/">Contact Us</Link></li>
-            <li><Link to="/dashboard">Dashboard</Link></li>
-            <li><Link to="/menu">Our Menu</Link></li>
-            <li><Link to="/order/offered">Order Food</Link></li>
-            <li><Link to="/secret">Secret</Link></li>
-            <li><Link to='dashboard/mycart'>
+            <li><ActiveLink to="/">Home</ActiveLink></li>
+            <li><ActiveLink to="/">Contact Us</ActiveLink></li>
+            <li><ActiveLink to="/dashboard">Dashboard</ActiveLink></li>
+            <li><ActiveLink to="/menu">Our Menu</ActiveLink></li>
+            <li><ActiveLink to="/order/offered">Order Food</ActiveLink></li>
+            <li><ActiveLink to="/secret">Secret</ActiveLink></li>
+            <li><ActiveLink to='dashboard/mycart'>
                 <div className="indicator">
                     <span className="indicator-item badge badge-secondary text-white">{cart?.length || 0}</span>
                     <FaShoppingCart className='w-8 h-8 hover:text-red-600' />
                 </div>
-            </Link></li>
+            </ActiveLink></li>
         </div>
 
     // handleLogOut
