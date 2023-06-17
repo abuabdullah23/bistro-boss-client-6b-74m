@@ -8,7 +8,7 @@ import ActiveLink from '../../../components/ActiveLink/ActiveLink';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    const [cart]  = useCart();
+    const [cart] = useCart();
 
     const navOptions =
         <div className='md:flex items-center'>
@@ -17,11 +17,13 @@ const Navbar = () => {
             <li><ActiveLink to="/dashboard">Dashboard</ActiveLink></li>
             <li><ActiveLink to="/menu">Our Menu</ActiveLink></li>
             <li><ActiveLink to="/order/offered">Order Food</ActiveLink></li>
-            <li><ActiveLink to="/secret">Secret</ActiveLink></li>
             <li><ActiveLink to='dashboard/mycart'>
                 <div className="indicator">
                     <span className="indicator-item badge badge-secondary text-white">{cart?.length || 0}</span>
-                    <FaShoppingCart className='w-8 h-8 hover:text-red-600' />
+                    <span className='flex items-center'>
+                        <span>Our Shop</span>
+                        <FaShoppingCart className='w-8 h-8 hover:text-red-600' />
+                    </span>
                 </div>
             </ActiveLink></li>
         </div>
@@ -74,7 +76,7 @@ const Navbar = () => {
                         user
                             ? <>
                                 <button onClick={handleLogOut} className='hover:bg-white hover:text-black py-2 px-3 rounded-md'>Log Out</button>
-                                <img className='w-10 h-10 rounded-full object-cover cursor-pointer' src={user.photoURL? user?.photoURL : ''} title={user.displayName ? user?.displayName : user.email} alt={user.displayName ? user?.displayName : user.email} />
+                                <img className='w-10 h-10 rounded-full object-cover cursor-pointer' src={user.photoURL ? user?.photoURL : ''} title={user.displayName ? user?.displayName : user.email} alt={user.displayName ? user?.displayName : user.email} />
                             </>
                             : <Link className='hover:bg-white hover:text-black py-2 px-3 rounded-md' to="/login">Login</Link>
                     }

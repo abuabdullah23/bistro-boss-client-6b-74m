@@ -6,8 +6,8 @@ import BackToHome from '../../components/BackToHome';
 import { AuthContext } from '../../provider/AuthProvider';
 import Swal from 'sweetalert2';
 
-import { useForm } from "react-hook-form";
 import { Helmet } from 'react-helmet-async';
+import { useForm } from 'react-hook-form';
 
 const SignUp = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -29,9 +29,22 @@ const SignUp = () => {
                 });
                 updateUserProfile(name, photoURL)
                     .then(result => {
-                        console.log(result.user)
-                        reset('');
-                        navigate('/');
+                        const savedUser = { name: data.name, email: data.email, photo: data.photoURL }
+                        // user info add in MongoDb
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(savedUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (insertedId) {
+                                    navigate('/');
+                                    reset('');
+                                }
+                            })
                     })
                     .catch(error => {
                         console.log(error.message)
@@ -83,23 +96,24 @@ const SignUp = () => {
                         {/* https://stackoverflow.com/questions/5142103/regex-to-validate-password-strength */}
                         <div className='mb-5'>
                             <p className='mb-2'>Password</p>
-                            <input className='py-2 px-4 rounded-md w-full' type="password" 
-                            // {...register("password", {
-                                // required: true,
-                                // minLength: 6,
-                                // maxLength: 20,
-                                // pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
+                            <input className='py-2 px-4 rounded-md w-full' type="password" required name="password" id="password" placeholder='Enter your password' />
+                        </div>
+                        {/* {...register("password", {
+                                required: true,
+                                minLength: 6,
+                                maxLength: 20,
+                                pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
 
-                            // })} 
-                            required name="password" id="password" placeholder='Enter your password' />
-                            {/* {errors.password?.type === 'required' && <span className='text-red-500 mt-2'>Password is required</span>}
+                                })}  */}
+
+                        {/* {errors.password?.type === 'required' && <span className='text-red-500 mt-2'>Password is required</span>}
                             {errors.password?.type === 'minLength' && <span className='text-red-500 mt-2'>Length should be 6 character</span>}
                             {errors.password?.type === 'maxLength' && <span className='text-red-500 mt-2'>Length should be less then 21</span>}
                             {errors.password?.type === 'pattern' && <span className='text-red-500 mt-2'>Password must be One uppercase, one special character, one number and one small character.</span>} */}
-                        </div>
+
 
                         {/* Photo Url */}
-                        <div className='mb-5'>
+                        < div className='mb-5' >
                             <p className='mb-2'>Photo Url</p>
                             <input className='py-2 px-4 rounded-md w-full' type="text" {...register("photoURL", { required: true })} name="photoURL" id="photoURL" placeholder='Type your photo url here' />
                             {errors.name && <span className='text-red-500 mt-2'>Photo Url is required</span>}
@@ -114,8 +128,8 @@ const SignUp = () => {
                     </div>
                     <SocialLogin />
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

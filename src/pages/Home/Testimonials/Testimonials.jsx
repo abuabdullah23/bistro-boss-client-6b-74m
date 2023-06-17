@@ -18,7 +18,7 @@ import '@smastrom/react-rating/style.css'
 const Testimonials = () => {
 
     const [reviews, setReviews] = useState([]);
-    console.log(reviews)
+    // console.log(reviews)
 
     useEffect(() => {
         fetch('reviews.json')

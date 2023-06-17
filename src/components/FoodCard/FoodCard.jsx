@@ -27,7 +27,6 @@ const FoodCard = ({ item }) => {
                 .then(data => {
                     console.log(data);
                     if (data.insertedId) {
-                        refetch(); // to update the number of cart icon
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -35,6 +34,7 @@ const FoodCard = ({ item }) => {
                             showConfirmButton: false,
                             timer: 1500
                         })
+                        refetch(); // to update the number of cart icon
                     }
                 })
         } else {
