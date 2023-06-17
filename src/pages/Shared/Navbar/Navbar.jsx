@@ -17,7 +17,7 @@ const Navbar = () => {
             <li><Link to="/menu">Our Menu</Link></li>
             <li><Link to="/order/offered">Order Food</Link></li>
             <li><Link to="/secret">Secret</Link></li>
-            <li><Link>
+            <li><Link to='dashboard/mycart'>
                 <div className="indicator">
                     <span className="indicator-item badge badge-secondary text-white">{cart?.length || 0}</span>
                     <FaShoppingCart className='w-8 h-8 hover:text-red-600' />
