@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {  useEffect, useRef, useState } from 'react';
 import './Login.css';
 import loginImg from '../../assets/others/authentication2.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
@@ -6,15 +6,15 @@ import Swal from 'sweetalert2';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import BackToHome from '../../components/BackToHome';
-import { AuthContext } from '../../provider/AuthProvider';
 import { Helmet } from 'react-helmet-async';
+import useAuth from '../../hooks/useAuth';
 
 
 const Login = () => {
     // const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true)
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn } = useAuth();
 
     // redirect after login
     const navigate = useNavigate();

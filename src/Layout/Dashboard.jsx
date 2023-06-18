@@ -6,13 +6,15 @@ import ActiveLink from '../components/ActiveLink/ActiveLink';
 import useCart from '../hooks/useCart';
 import { ImSpoonKnife, ImList2 } from "react-icons/im";
 import { HiUserGroup } from "react-icons/hi";
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
     const [cart] = useCart();
 
     // TODO: load data from the server to admin have to dynamic
     // const isAdmin = false;
-    const isAdmin = true;
+    // const isAdmin = true;
+    const {isAdmin} = useAdmin();
 
     const navItem = <>
         <li><Link to="/" className='flex flex-col uppercase px-3 py-2 rounded-md justify-center mb-10'>
