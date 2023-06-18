@@ -92,12 +92,13 @@ const SignUp = () => {
                             {errors.email && <span className='text-red-500 mt-2'>Email is required</span>}
                         </div>
 
-                        {/* Password */}
+                        {/* Password react-hook-form ইউজ করলে অবশ্যই রেজিস্টার উইথ পাসওয়ার্ড করতে হবে। */}
                         {/* https://stackoverflow.com/questions/5142103/regex-to-validate-password-strength */}
                         <div className='mb-5'>
                             <p className='mb-2'>Password</p>
-                            <input className='py-2 px-4 rounded-md w-full' type="password" required name="password" id="password" placeholder='Enter your password' />
+                            <input className='py-2 px-4 rounded-md w-full' type="password" {...register("password")} required name="password" id="password" placeholder='Enter your password' />
                         </div>
+                        {/* TODO: Have to implement strong password */}
                         {/* {...register("password", {
                                 required: true,
                                 minLength: 6,
@@ -105,12 +106,10 @@ const SignUp = () => {
                                 pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
 
                                 })}  */}
-
                         {/* {errors.password?.type === 'required' && <span className='text-red-500 mt-2'>Password is required</span>}
                             {errors.password?.type === 'minLength' && <span className='text-red-500 mt-2'>Length should be 6 character</span>}
                             {errors.password?.type === 'maxLength' && <span className='text-red-500 mt-2'>Length should be less then 21</span>}
                             {errors.password?.type === 'pattern' && <span className='text-red-500 mt-2'>Password must be One uppercase, one special character, one number and one small character.</span>} */}
-
 
                         {/* Photo Url */}
                         < div className='mb-5' >

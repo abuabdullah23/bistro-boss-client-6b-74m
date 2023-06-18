@@ -1,11 +1,11 @@
 import React from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
-import useCart from '../../../hooks/useCart';
+import useCart from '../../../../hooks/useCart';
 
 const SingleCart = ({ row, index }) => {
     const { _id, price, email, name, image } = row;
-    const [refetch] = useCart();
+    const [cart, refetch] = useCart();
 
     const handleDeleteCart = (id) => {
         console.log(id)

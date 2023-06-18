@@ -1,8 +1,9 @@
 import React from 'react';
-import SectionTitle from '../../../components/SectionTitle';
-import { Helmet } from 'react-helmet-async';
-import useCart from '../../../hooks/useCart';
+
 import SingleCart from './SingleCart';
+import { Helmet } from 'react-helmet-async';
+import SectionTitle from '../../../../components/SectionTitle';
+import useCart from '../../../../hooks/useCart';
 
 const MyCart = () => {
     const [cart] = useCart();
@@ -25,7 +26,7 @@ const MyCart = () => {
                 </div>
 
                 {/* Table */}
-                <div className="overflow-x-auto mt-5 rounded-xl">
+                <div className="overflow-x-auto mt-5 rounded-t-xl">
                     <table className="table">
                         {/* head */}
                         <thead className='text-white text-xl'>

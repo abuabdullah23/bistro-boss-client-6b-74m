@@ -3,7 +3,7 @@ import FoodCard from '../../../components/FoodCard/FoodCard';
 import CommonButton from '../../../components/CommonButton';
 import { Link } from 'react-router-dom';
 
-// TO DO: have to implement pagination
+// TODO: have to implement pagination
 
 const OrderTab = ({ items }) => {
     return (
