@@ -5,11 +5,13 @@ import { ImSpoonKnife } from 'react-icons/im';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import useMenu from '../../../../hooks/useMenu';
 
 const img_hosting_token = import.meta.env.VITE_image_upload_token;
 const AddItems = () => {
     const { register, handleSubmit } = useForm();
     const [axiosSecure] = useAxiosSecure();
+    const [, refetch] = useMenu();
 
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
@@ -32,6 +34,7 @@ const AddItems = () => {
                         .then(data => {
                             console.log(data)
                             if (data.data.insertedId) {
+                                refetch();
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Done',

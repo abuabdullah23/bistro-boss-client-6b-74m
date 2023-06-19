@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/others/authentication2.png'
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
 import BackToHome from '../../components/BackToHome';
@@ -11,7 +11,11 @@ import { useForm } from 'react-hook-form';
 
 const SignUp = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
+
+    // redirect after login
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
@@ -41,7 +45,7 @@ const SignUp = () => {
                             .then(res => res.json())
                             .then(data => {
                                 if (insertedId) {
-                                    navigate('/');
+                                    navigate(from, { replace: true })
                                     reset('');
                                 }
                             })
