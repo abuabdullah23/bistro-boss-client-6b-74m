@@ -21,7 +21,7 @@ const AllUsers = () => {
                 heading={'MANAGE ALL USERS'}
             ></SectionTitle>
 
-            <div className='bg-white md:mx-10 my-10 p-5 md:p-10 rounded-lg'>
+            <div className='bg-white md:px-10 my-10 p-5 rounded-lg'>
                 <div className='uppercase flex items-center justify-between gap-5 font-semibold'>
                     <h2 className='text-3xl'>Total Users: {users.length}</h2>
                 </div>

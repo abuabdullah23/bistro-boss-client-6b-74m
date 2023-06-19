@@ -13,10 +13,12 @@ const Navbar = () => {
     const navOptions =
         <div className='md:flex items-center'>
             <li><ActiveLink to="/">Home</ActiveLink></li>
-            <li><ActiveLink to="/">Contact Us</ActiveLink></li>
-            <li><ActiveLink to="/dashboard">Dashboard</ActiveLink></li>
+            <li><ActiveLink to="/contact-us">Contact Us</ActiveLink></li>
             <li><ActiveLink to="/menu">Our Menu</ActiveLink></li>
             <li><ActiveLink to="/order/offered">Order Food</ActiveLink></li>
+            {
+                user && <li><ActiveLink to="/dashboard">Dashboard</ActiveLink></li>
+            }
             <li><ActiveLink to='dashboard/mycart'>
                 <div className="indicator">
                     <span className="indicator-item badge badge-secondary text-white">{cart?.length || 0}</span>

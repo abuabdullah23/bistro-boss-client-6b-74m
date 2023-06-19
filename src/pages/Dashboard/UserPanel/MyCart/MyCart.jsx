@@ -18,7 +18,7 @@ const MyCart = () => {
                 heading={'WANNA ADD MORE?'}
             ></SectionTitle>
 
-            <div className='bg-white md:mx-10 my-10 p-5 md:p-10 rounded-lg'>
+            <div className='bg-white p-5 md:p-10 rounded-lg'>
                 <div className='uppercase flex items-center justify-between gap-5 font-semibold'>
                     <h2 className='text-3xl'>Total Orders : {cart.length}</h2>
                     <h2 className='text-3xl'>Total Price: ${total}</h2>

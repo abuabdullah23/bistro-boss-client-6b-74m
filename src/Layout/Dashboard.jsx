@@ -14,7 +14,7 @@ const Dashboard = () => {
     // TODO: load data from the server to admin have to dynamic
     // const isAdmin = false;
     // const isAdmin = true;
-    const {isAdmin} = useAdmin();
+    const [isAdmin] = useAdmin();
 
     const navItem = <>
         <li><Link to="/" className='flex flex-col uppercase px-3 py-2 rounded-md justify-center mb-10'>
@@ -145,7 +145,7 @@ const Dashboard = () => {
                     </label>
                     
                     {/* style={{ width: '1024px' }} md:absolute md:left-64 overflow-y-auto */}
-                    <div className='md:py-10 p-5 bg-[#ececec]'>
+                    <div className='md:py-10 md:px-10 p-5 bg-[#f8f8f8]'>
                         <Outlet />
                     </div>
                 </div>
