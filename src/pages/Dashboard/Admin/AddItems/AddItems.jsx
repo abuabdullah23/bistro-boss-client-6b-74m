@@ -5,13 +5,11 @@ import { ImSpoonKnife } from 'react-icons/im';
 import { useForm } from 'react-hook-form';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
-import useCart from '../../../../hooks/useCart';
 
 const img_hosting_token = import.meta.env.VITE_image_upload_token;
 const AddItems = () => {
     const { register, handleSubmit } = useForm();
     const [axiosSecure] = useAxiosSecure();
-    const [, refetch] = useCart();
 
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
@@ -32,12 +30,14 @@ const AddItems = () => {
                     // console.log(newItem);
                     axiosSecure.post('/menu', newItem)
                         .then(data => {
-                            refetch();
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Done',
-                                text: `${name} is : Successfully Added in your website.`,
-                            })
+                            console.log(data)
+                            if (data.data.insertedId) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Done',
+                                    text: `${name} is : Successfully Added in your website.`,
+                                })
+                            }
                         })
                 }
             })
@@ -72,7 +72,8 @@ const AddItems = () => {
                             <option>Salad</option>
                             <option>Soup</option>
                             <option>Pizza</option>
-                            <option>Desserts</option>
+                            <option>Dessert</option>
+                            <option>Popular</option>
                             <option>Drinks</option>
                             <option>Offered</option>
                         </select>
