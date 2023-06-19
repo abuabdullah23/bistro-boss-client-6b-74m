@@ -3,6 +3,7 @@ import { FaPenAlt, FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useMenu from '../../../../hooks/useMenu';
+import { Link } from 'react-router-dom';
 
 const SingleItem = ({ item, index }) => {
     const { _id, name, image, category, price } = item;
@@ -62,7 +63,7 @@ const SingleItem = ({ item, index }) => {
             </td>
             <td className='text-slate-600 text-lg'>${price}</td>
             <td className='text-left'>
-                <button className='bistro-bg hover:bg-[#a86d00] text-white rounded-md py-3 px-3'> <FaPenAlt /> </button>
+                <Link to={`/dashboard/update-menu/${_id}`}> <button className='bistro-bg hover:bg-[#a86d00] text-white rounded-md py-3 px-3'> <FaPenAlt /> </button></Link>
             </td>
             <td className='text-left'>
                 <button onClick={() => handleDeleteItem(_id)} className='bg-[#B91C1C] hover:bg-[#df0e0e] text-white rounded-md py-3 px-3'> <FaTrashAlt /> </button>

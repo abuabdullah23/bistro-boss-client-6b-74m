@@ -57,9 +57,9 @@ const AddItems = () => {
             ></SectionTitle>
 
             <form onSubmit={handleSubmit(onSubmit)}
-                className='mt-5 border rounded-lg p-5 bg-[#F3F3F3]'>
+                className='mt-5 border rounded-lg p-5 md:px-16 md:py-10 bg-[#F3F3F3]'>
                 {/* row 1 */}
-                <div className='md:flex gap-4'>
+                <div className='md:flex gap-4 mt-4'>
                     <div className='w-full'>
                         <p className='text-lg font-semibold ps-3 mb-1 mt-2'>Recipe Name <span className='text-red-400'>*</span> </p>
                         <input required className='py-2 px-3 border rounded-md w-full' type="text" name="name" {...register("name", { required: true })} id="name" placeholder='Recipe Name' />
@@ -67,7 +67,7 @@ const AddItems = () => {
                 </div>
 
                 {/* row 2 */}
-                <div className='md:flex gap-4'>
+                <div className='md:flex gap-4 mt-4'>
                     <div className='w-full'>
                         <p className='text-lg font-semibold ps-3 mb-1 mt-2'>Category<span className='text-red-400'>*</span> </p>
                         <select defaultValue="Salad" required className='py-2 px-3 border rounded-md w-full' type="text" name="category" id="category" {...register("category", { required: true })} placeholder='Category' >
@@ -87,7 +87,7 @@ const AddItems = () => {
                     </div>
                 </div>
                 {/* row 3 */}
-                <div className='md:flex gap-4'>
+                <div className='md:flex gap-4 mt-4'>
                     <div className='w-full'>
                         <p className='text-lg font-semibold ps-3 mb-1 mt-2'> Recipe Details</p>
                         <textarea className='py-2 px-3 border rounded-md w-full h-32' type="text" name="recipe"  {...register("recipe")} id="recipe" placeholder='Recipe Details' />
