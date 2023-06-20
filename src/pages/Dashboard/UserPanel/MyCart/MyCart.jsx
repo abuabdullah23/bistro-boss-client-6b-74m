@@ -4,10 +4,12 @@ import SingleCart from './SingleCart';
 import { Helmet } from 'react-helmet-async';
 import SectionTitle from '../../../../components/SectionTitle';
 import useCart from '../../../../hooks/useCart';
+import { Link } from 'react-router-dom';
 
 const MyCart = () => {
     const [cart] = useCart();
-    const total = cart.reduce((sum, item) => (item.price + sum), 0).toFixed(2);
+    const total = cart.reduce((sum, item) => (item.price + sum), 0);
+    const totalPrice = parseFloat(total.toFixed(2))
     return (
         <div>
             <Helmet>
@@ -21,8 +23,10 @@ const MyCart = () => {
             <div className='bg-white p-5 md:p-10 rounded-lg'>
                 <div className='uppercase flex items-center justify-between gap-5 font-semibold'>
                     <h2 className='text-3xl'>Total Orders : {cart.length}</h2>
-                    <h2 className='text-3xl'>Total Price: ${total}</h2>
-                    <button className='bistro-bg p-4 rounded-md uppercase text-white'>Pay</button>
+                    <h2 className='text-3xl'>Total Price: ${totalPrice}</h2>
+                    <Link to="/dashboard/payment">
+                        <button className='bistro-bg hover:bg-[#c98200] p-4 rounded-md uppercase text-white'>Pay</button>
+                    </Link>
                 </div>
 
                 {/* Table */}

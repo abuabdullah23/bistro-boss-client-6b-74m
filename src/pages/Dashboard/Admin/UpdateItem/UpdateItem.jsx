@@ -12,7 +12,7 @@ const UpdateItem = () => {
     const onSubmit = data => {
         // update single menu Item
         const {name, price, category, recipe} = data;
-        const updateItem = {name, price, category: category.toLowerCase(), recipe}
+        const updateItem = {name, price: parseInt(price), category: category.toLowerCase(), recipe}
         fetch(`http://localhost:5000/dashboard/update-menu/${item._id}`, {
             method: "PUT",
             headers: {
@@ -53,7 +53,7 @@ const UpdateItem = () => {
             </Helmet>
             <SectionTitle
                 subHeading={`What's Update?`}
-                heading={'Add An Item'}
+                heading={'UPDATE ITEM'}
             ></SectionTitle>
 
             <form onSubmit={handleSubmit(onSubmit)}

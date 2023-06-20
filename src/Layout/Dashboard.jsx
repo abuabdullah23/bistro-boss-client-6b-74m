@@ -105,7 +105,7 @@ const Dashboard = () => {
         <li>
             <div className='flex items-center gap-4 justify-start tracking-normal'>
                 <FaHome />
-                <ActiveLink to="/dashboard/home"> Home</ActiveLink>
+                <ActiveLink to="/"> Home</ActiveLink>
             </div>
         </li>
 
