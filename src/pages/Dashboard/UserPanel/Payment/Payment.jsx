@@ -28,7 +28,7 @@ const Payment = () => {
                 {/* Payment Method */}
                 <div className='my-10 md: px-16'>
                     <Elements stripe={stripePromise}>
-                        <CheckoutForm price={price} ></CheckoutForm>
+                        <CheckoutForm cart={cart} price={price} ></CheckoutForm>
                     </Elements>
                 </div>
             </div>

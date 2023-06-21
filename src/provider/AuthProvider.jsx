@@ -49,13 +49,13 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            console.log(currentUser)
+            // console.log(currentUser)
 
             // jwt token with axios data fetching
             if (currentUser) {
                 axios.post('http://localhost:5000/jwt', { email: currentUser.email })
                     .then(data => {
-                        console.log(data.data.token)
+                        // console.log(data.data.token)
                         localStorage.setItem('access-token', data.data.token)
                         setLoading(false)
                     })

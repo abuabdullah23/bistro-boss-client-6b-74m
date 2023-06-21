@@ -4,3 +4,7 @@
     font-weight: bold;
     text-decoration: underline;
 }
+
+.deActive:hover{
+    color: rgb(255, 187, 0);
+}

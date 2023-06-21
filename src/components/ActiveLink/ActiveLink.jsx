@@ -7,7 +7,7 @@ const ActiveLink = ({ to, children }) => {
         <div>
             <NavLink style={{display: 'flex', gap: '12px', justifyItems: 'center'}}
                 to={to}
-                className={({ isActive }) => isActive ? "active" : ""}
+                className={({ isActive }) => isActive ? "active" : "deActive"}
             >
                 {children}
             </NavLink>

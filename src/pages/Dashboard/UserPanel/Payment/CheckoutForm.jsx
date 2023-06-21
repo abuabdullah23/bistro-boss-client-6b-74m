@@ -2,11 +2,12 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
+import Swal from 'sweetalert2';
 
-const CheckoutForm = ({ price }) => {
+const CheckoutForm = ({ cart, price }) => {
     const stripe = useStripe();
     const elements = useElements();
-    const {user} = useAuth();
+    const { user } = useAuth();
     const [cardError, setCardError] = useState('');
     const [axiosSecure] = useAxiosSecure();
     const [clientSecret, setClientSecret] = useState('');
@@ -15,12 +16,17 @@ const CheckoutForm = ({ price }) => {
 
     useEffect(() => {
         console.log(price)
-        axiosSecure.post('/create-payment-intent', { price })
-            .then(res => {
-                console.log(res.data.clientSecret);
-                setClientSecret(res.data.clientSecret);
-            })
+        if (price > 0) {
+            axiosSecure.post('/create-payment-intent', { price })
+                .then(res => {
+                    // console.log(res.data.clientSecret);
+                    setClientSecret(res.data.clientSecret);
+                })
+        }
     }, [])
+
+    // console.log(stripe)
+    // console.log(elements)
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -46,9 +52,9 @@ const CheckoutForm = ({ price }) => {
             // console.log('Payment method', paymentMethod)
         }
 
-        setProcessing(true); 
+        setProcessing(true);
 
-        const { paymentIntent, error:confirmError } = await stripe.confirmCardPayment(
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
             clientSecret,
             {
                 payment_method: {
@@ -60,15 +66,42 @@ const CheckoutForm = ({ price }) => {
                 },
             },
         );
-        if(confirmError){
+        if (confirmError) {
             console.log(confirmError);
         }
         console.log('payment Intent', paymentIntent);
         setProcessing(false)
 
-        if(paymentIntent.status === "succeeded"){
+        if (paymentIntent.status === "succeeded") {
             setTransactionId(paymentIntent.id);
             // TODO: next steps
+            // save payment information to the server
+            const payment = {
+                name: user?.name,
+                email: user?.email,
+                transactionId: paymentIntent.id,
+                price,
+                date: new Date(),
+                status: 'Service Pending',
+                quantity: cart.length,
+                cartItems: cart.map(item => item._id),
+                menuItems: cart.map(item => item.menuItemId),
+                itemNames: cart.map(item => item.name)
+            }
+            axiosSecure.post('/payments', payment)
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data.insertResult.insertedId) {
+                        // display confirm sweet alert
+                        Swal.fire({
+                            position: 'top-center',
+                            icon: 'success',
+                            title: 'Successful Your Payment',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                })
         }
 
         console.log('card', card)
@@ -94,7 +127,7 @@ const CheckoutForm = ({ price }) => {
                     }}
                 />
                 <div className='text-center mt-16'>
-                    <button type="submit" disabled={!stripe || !clientSecret || processing} className='text-lg font-semibold py-2 px-10 bg-blue-700 text-white hover:bg-blue-800 rounded-md w-1/3'>
+                    <button type="submit" disabled={!stripe || !clientSecret || !processing} className='text-lg font-semibold py-2 px-10 bg-blue-700 text-white hover:bg-blue-800 rounded-md w-1/3'>
                         Pay
                     </button>
                 </div>
