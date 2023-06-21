@@ -5,9 +5,11 @@ import Swal from 'sweetalert2';
 import { FaShoppingCart } from 'react-icons/fa';
 import useCart from '../../../hooks/useCart';
 import ActiveLink from '../../../components/ActiveLink/ActiveLink';
+import useAdmin from '../../../hooks/useAdmin';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const [isAdmin] = useAdmin();
     const [cart] = useCart();
 
     const navOptions =
@@ -17,7 +19,7 @@ const Navbar = () => {
             <li><ActiveLink to="/menu">Our Menu</ActiveLink></li>
             <li><ActiveLink to="/order/offered">Order Food</ActiveLink></li>
             {
-                user && <li><ActiveLink to="/dashboard">Dashboard</ActiveLink></li>
+                user && <li><ActiveLink to={isAdmin ? '/dashboard/admin-home' : '/dashboard/user-home'}>Dashboard</ActiveLink></li>
             }
             <li><ActiveLink to='dashboard/mycart'>
                 <div className="indicator">

@@ -4,9 +4,12 @@ import { SiCodechef } from "react-icons/si";
 import useMenu from '../../../../hooks/useMenu';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import useAuth from '../../../../hooks/useAuth';
 
 const AdminHome = () => {
     const [axiosSecure] = useAxiosSecure();
+    const {user} = useAuth();
+
     const { data: users = [], refetch } = useQuery(['users'], async () => {
         const res = await axiosSecure.get('/users')
         return res.data;
@@ -16,7 +19,7 @@ const AdminHome = () => {
 
     return (
         <div>
-            <h2 className='text-3xl mb-5'>HI, Welcome Back!</h2>
+            <h2 className='text-3xl mb-5'>HI, Welcome Back, <span className='font-bold'>{user?.displayName}</span>!</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
                 {/* revenue */}
                 <div className='bg-gradient-to-r from-[#BB34F5] to-[#FCDBFF] rounded-md py-5 px-5 flex gap-6 items-center justify-center text-white'>

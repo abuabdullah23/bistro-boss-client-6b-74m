@@ -17,6 +17,7 @@ import AddItems from "../pages/Dashboard/Admin/AddItems/AddItems";
 import ManageItems from "../pages/Dashboard/Admin/ManageItems/ManageItems";
 import UpdateItem from "../pages/Dashboard/Admin/UpdateItem/UpdateItem";
 import Payment from "../pages/Dashboard/UserPanel/Payment/Payment";
+import UserHome from "../pages/Dashboard/UserPanel/UserHome/UserHome";
 
 export const router = createBrowserRouter([
     {
@@ -43,7 +44,7 @@ export const router = createBrowserRouter([
                 path: 'sign-up',
                 element: <SignUp></SignUp>
             },
-            
+
 
         ]
     },
@@ -54,28 +55,32 @@ export const router = createBrowserRouter([
             // Admin Routes
             {
                 path: 'admin-home',
-                element: <AdminHome></AdminHome>
+                element: <AdminRoute><AdminHome/></AdminRoute>
             },
             {
                 path: 'add-items',
-                element: <AdminRoute><AddItems/></AdminRoute>
+                element: <AdminRoute><AddItems /></AdminRoute>
             },
             {
                 path: 'manage-items',
-                element: <AdminRoute><ManageItems/></AdminRoute>
+                element: <AdminRoute><ManageItems /></AdminRoute>
             },
             {
                 path: 'update-menu/:id',
-                element: <AdminRoute><UpdateItem/></AdminRoute>,
-                loader: ({params})=> fetch(`http://localhost:5000/dashboard/update-menu/${params.id}`)
+                element: <AdminRoute><UpdateItem /></AdminRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/dashboard/update-menu/${params.id}`)
             },
             {
                 path: 'all-users',
-                element: <AdminRoute><AllUsers/></AdminRoute>
+                element: <AdminRoute><AllUsers /></AdminRoute>
             },
 
 
             // Users Routes
+            {
+                path: 'user-home',
+                element: <UserHome></UserHome>
+            },
             {
                 path: 'mycart',
                 element: <MyCart></MyCart>
@@ -84,7 +89,7 @@ export const router = createBrowserRouter([
                 path: 'payment',
                 element: <Payment></Payment>
             }
-            
+
         ]
     },
 ]);
