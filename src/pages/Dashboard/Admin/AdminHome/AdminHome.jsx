@@ -3,6 +3,7 @@ import { FaCarAlt, FaUserAlt, FaWallet } from 'react-icons/fa';
 import { SiCodechef } from "react-icons/si";
 import useMenu from '../../../../hooks/useMenu';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 
 const AdminHome = () => {
     const [axiosSecure] = useAxiosSecure();
@@ -10,7 +11,8 @@ const AdminHome = () => {
         const res = await axiosSecure.get('/users')
         return res.data;
     })
-    const { menu } = useMenu();
+    const [ menu ] = useMenu();
+    console.log(menu)
 
     return (
         <div>
